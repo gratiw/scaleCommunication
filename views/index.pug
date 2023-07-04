@@ -1,0 +1,93 @@
+doctype html
+html
+
+  head
+    title MODUŁ WAGOWY
+    link(href='/assets/style.css' rel='stylesheet')
+    meta(charset='utf-8')
+
+
+  body
+
+    #console-wrapper
+      #mssg-wrapper
+        #mssg-container
+      input#mssg(type='text' name='mssg')
+      input#send-bttn(type='button' value='SEND')
+      #console-tggl-bttn 
+        ='</>'
+      #mode-tggl-bttn
+        !='TRYB: <span>PRACA</span>' 
+
+    header
+      h1 
+        ='CSN-STANEL'
+      h2 
+        ='MODUŁ WAGOWY'
+
+    .tab-wrapper
+      .tab.active(data-title='PRACA')
+        .project-app-wrapper
+
+          .project-section.dissabled(data-step='1')
+            .project-section-title 
+              ='kod rysunku'
+            input#project-nr(type='text' name='project-nr')
+
+          .project-section.dissabled(data-step='2')
+            .project-section-title 
+              ='kod materiału'
+            input#material-nr(type='text' name='material-nr')
+
+          .scale-element.digits.project.dissabled(data-step='3')
+            .digits-scale-button 
+              ='zważ'
+            span#result-project.result 
+              ='0.00'
+            span.units 
+              ='kg'
+
+          #send-project.project-section.submit.dissabled(data-step='4')
+            .project-section-submit 
+              ='zapisz'
+
+      .tab(data-title='WAGA')
+        .scale-app-wrapper
+          .scale-element.digits
+            span#result.result 
+              ='0.00'
+            span.units 
+              ='kg'
+
+          #S.scale-element.scale-button.button-1-3(data-send='S')
+            span 
+              ='odczyt stabilny'
+
+          #SI.scale-element.scale-button.button-1-3(data-send='SI')
+            span 
+              ='odczyt szybki'
+
+          #C1.scale-element.scale-button.button-1-3(data-send='C1')
+            span 
+              ='odczyt ciągły'
+          br
+
+          #Z.scale-element.scale-button.button-1-4(data-send='Z')
+            span 
+              ='zeruj'
+
+          #T.scale-element.scale-button.button-1-4(data-send='T')
+            span 
+              ='taruj'
+
+          #OT.scale-element.scale-button.button-1-4(data-send='OT')
+            span 
+              ='wyświetl wartość tary'
+
+          #UT.scale-element.scale-button.button-1-4(data-send='UT')
+            span 
+              ='zeruj tarę'
+
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+    script(src='node_modules/simple-web-serial/dist/simple-serial.min.js')
+    script(src='js/script.js')
