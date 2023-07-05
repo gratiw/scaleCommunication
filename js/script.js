@@ -116,7 +116,7 @@ connection.on('event-from-arduino', function(data) {
 
     if(data.match( numberPattern )) {
       var toDigits = data.match( numberPattern ) / 1000;
-      $( "#result-project" ).text(toDigits.toFixed(2));
+      $( "#result-project" ).attr("value", toDigits.toFixed(2));
 
       $( ".project-section" ).removeClass("dissabled");
       $( ".scale-element.digits.project" ).removeClass("dissabled");
@@ -225,11 +225,18 @@ $( "#material-nr" ).on("keypress", function(event){
 });
 
 $( ".digits-scale-button" ).on("click", function(){
-  // $( this ).addClass("green");
   $( '[data-step="3"]' ).addClass("busy");
   $( ".project-section" ).addClass("dissabled");
   sendMssg("SI");
   projectScaleState = "scaling";
+});
+
+$( "#result-project" ).on("keydown", function(event){
+  const isNumber = /^[0-9]$/i.test(event.key);
+
+  if(isNumber){
+    console.log("M");
+  }
 });
 
 $( ".project-section-submit" ).on("click", function(){
@@ -242,7 +249,7 @@ $( ".project-section-submit" ).on("click", function(){
   const postData = {
     projectNo: $( "#project-nr" ).val(),
     materialNo: $( '#material-nr' ).val(),
-    weight: $( "#result-project" ).text()
+    weight: $( "#result-project" ).val()
   };
   
   fetch('/dbSend', {
@@ -259,7 +266,7 @@ $( ".project-section-submit" ).on("click", function(){
         $( '[data-step="1"]' ).removeClass("dissabled");
         $( "#project-nr" ).val(null);
         $( '#material-nr' ).val(null);
-        $( "#result-project" ).text('0.00');
+        $( "#result-project" ).attr("value", '0.00');
         $( "#project-nr" ).focus()
         } else {
         // Request failed

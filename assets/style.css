@@ -333,6 +333,15 @@ span.red{
     margin-right: 190px;
 }
 
+input.result{
+    background-color: transparent;
+    font-size: 8rem;
+    text-align: end;
+    color: var(--secondary-color);
+    font-family: 'SCPB';
+    border: none;
+}
+
 .units{
     position: absolute;
     top: 0;
