@@ -6,12 +6,17 @@ const fileURLToPath = require('url');
 const app = express();
 const port = process.env.PORT || 5656;
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "secret",
-  database: "rysunki"
-});
+var con;
+
+function connectDB(){
+
+  con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "secret",
+    database: "rysunki"
+  });
+}
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname));
@@ -23,6 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/dbSend', function(req, res){  
+    connectDB();
     //now req.body will be populated with the object you sent
     console.log(req.body); 
     con.connect(function(err) {
@@ -33,6 +39,7 @@ app.post('/dbSend', function(req, res){
         });
       });
     res.sendStatus(200);
+    res.end;
 });
 
 app.listen(port, () => {
