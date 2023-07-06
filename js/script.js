@@ -1,14 +1,17 @@
 // Set up the serial connection
 const usbVendorId = 0x3343;
+
 let connection = SimpleSerial.connect({ // Connection with a custom constructor object
   accessButtonLabel: "POŁĄCZ",
-  accessText: "Kliknij przycisk 'POŁĄCZ', a następnie wybierz COM5",
+  accessText: "Nie połączono z modułem wagowym. Kliknij przycisk 'POŁĄCZ', a następnie wybierz COM5",
   styleDomElements: false,
-  filters: [{ usbVendorId }]
+  filters: [{ usbVendorId }],
 });
 
 var scaleState = null;
 var projectScaleState = null;
+
+$( "#project-nr" ).focus();
 
 // React to incoming events
 connection.on('event-from-arduino', function(data) {        
@@ -44,7 +47,7 @@ connection.on('event-from-arduino', function(data) {
 
   switch(data){
     case "A":
-      $( '[data-step="1"]' ).removeClass("dissabled");
+      $( ".project .digits-scale-button.dissabled" ).removeClass("dissabled");
       $( "#project-nr" ).focus();
       break;
     case "C1 A CR LF":
@@ -124,6 +127,7 @@ connection.on('event-from-arduino', function(data) {
     }
   }
 });
+
 
 // Common functions
 function getActTime(){
@@ -231,11 +235,23 @@ $( ".digits-scale-button" ).on("click", function(){
   projectScaleState = "scaling";
 });
 
-$( "#result-project" ).on("keydown", function(event){
-  const isNumber = /^[0-9]$/i.test(event.key);
+$('#result-project').on("input", function() {
+  var dInput = this.value;
 
-  if(isNumber){
-    console.log("M");
+  if ( dInput.match(/[^0-9.]/g) ){
+    this.value = dInput.replace(/[^0-9.]/g, "");
+  }
+
+  if ( dInput.match(/\..*\./g) ){
+    this.value = dInput.replace(/\..*\./g, ".");
+  }
+
+  if (dInput.match(/^0+(?=\d+\.)/)) {
+    this.value = parseFloat(this.value);
+  }
+
+  if (dInput.match(/[\d+.]/)) {
+    $( '[data-step="4"]' ).removeClass("dissabled");
   }
 });
 

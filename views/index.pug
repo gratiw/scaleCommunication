@@ -29,7 +29,7 @@ html
       .tab.active(data-title='PRACA')
         .project-app-wrapper
 
-          .project-section.dissabled(data-step='1')
+          .project-section(data-step='1')
             .project-section-title 
               ='kod rysunku'
             input#project-nr(type='text' name='project-nr')
@@ -40,7 +40,7 @@ html
             input#material-nr(type='text' name='material-nr')
 
           .scale-element.digits.project.dissabled(data-step='3')
-            .digits-scale-button 
+            .digits-scale-button.dissabled
               ='zważ'
             input#result-project.result(type='text' name='project-nr' value='0.00' size='8')
             span.units 

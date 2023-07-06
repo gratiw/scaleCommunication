@@ -124,33 +124,33 @@ body{
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 0;
     left: 0;
+    height: 70px;
     background-color: var(--bg-color);
     z-index: 999999;
 }
 
 .SimpleSerial-modal-inner{
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    width: 50%;
-    height: 60%;
-    margin: auto;
-    padding: 48px 112px;
-    border-radius: 8px;
+    right: 0;
     background-color: var(--bg-secondary-color);
     color: var(--bttn-color);
     font-family: 'SCPB';
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
 }
 
+.SimpleSerial-modal-inner p{
+    color: #ef7070;
+    display: inline-block;
+    margin: 12px;
+}
+
 .SimpleSerial-modal-inner button{
-    padding: 20px;
-    font-size: 4rem;
+    display: inline-block;
+    padding: 8px;
+    font-size: 2rem;
     background-color: var(--bttn-green-color);
     color: var(--bttn-color);
     border-radius: 8px;
@@ -498,6 +498,11 @@ input.result{
     background-color: var(--main-color);
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.project .digits-scale-button.dissabled{
+    opacity: .2;
+    pointer-events: none;
 }
 
 .scale-element.digits.project.busy{
